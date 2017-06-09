@@ -1,5 +1,5 @@
 var validator = require('./../validator')
-var messages = require('./../messages')('user-login')
+var messages = require('./../../messages')('user-login')
 
 validator.schema({
     email: {

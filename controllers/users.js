@@ -28,7 +28,7 @@ users.prototype.get = {
 users.prototype.post = {
     login: function(req, res, next) {
         var passport = require('passport')
-        var validator = require('./components/validators/user-login')
+        var validator = require('./components/validators/samples/user-login')
 
         res.attachments.messages = require('./components/messages')('user-login')
         res.attachments.csrfToken = req.csrfToken()
@@ -78,7 +78,7 @@ users.prototype.post = {
     register: function(req, res) {
         var User = rootRequire('models/user')
         var vefifyCaptcha = require('./components/verifyCaptcha')
-        var validator = rootRequire('controllers/components/validators/user-register')
+        var validator = rootRequire('controllers/components/validators/samples/user-register')
 
         res.attachments.messages = require('./components/messages')('user-register')
         res.attachments.csrfToken = req.csrfToken()
@@ -127,7 +127,7 @@ users.prototype.post = {
 
 users.prototype.ajax = {
     is_unique_email: function(req, res) {
-        var validator = require('./components/validator')
+        var validator = require('./components/validators/validator')
         var messages = require('./components/messages')('user-register')
 
         validator.schema({
