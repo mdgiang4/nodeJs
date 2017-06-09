@@ -1,0 +1,31 @@
+if flash.info.length
+    div.alert.alert-info.fade.in.alert-dismissable
+        a(href="#", class="close", data-dismiss="alert", aria-label="close", title="close") x
+        each message in flash.info
+            div
+                i(class="fa fa-info", aria-hidden="true")
+                | !{message}
+                
+if flash.success.length
+    div.alert.alert-success.fade.in.alert-dismissable
+        a(href="#", class="close", data-dismiss="alert", aria-label="close", title="close") x
+        each message in flash.success
+            div
+                i(class="fa fa-check", aria-hidden="true")
+                | !{message}
+                
+if flash.warning.length
+    div.alert.alert-warning.fade.in.alert-dismissable
+        a(href="#", class="close", data-dismiss="alert", aria-label="close", title="close") x
+        each message in flash.warning
+            div
+                i(class="fa fa-exclamation-triangle", aria-hidden="true")
+                | !{message}
+                
+if flash.danger.length
+    div.alert.alert-danger.fade.in.alert-dismissable
+        a(href="#", class="close", data-dismiss="alert", aria-label="close", title="close") x
+        each message in flash.danger
+            div
+                i(class="fa fa-exclamation", aria-hidden="true")
+                | !{message}

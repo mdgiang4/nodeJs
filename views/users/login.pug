@@ -1,0 +1,41 @@
+extends /layout/default
+
+block plugin
+    script(type="text/javascript", src="/javascripts/validators/login-form.js")
+    script(type="text/javascript", src="/javascripts/form-validator.js")
+
+block variable
+    script(type="text/javascript")
+        if err !== undefined
+            | _err = !{ JSON.stringify(err) };
+        if messages !== undefined
+            | _messages = !{ JSON.stringify(messages) };
+
+block content
+    .row
+        .col-sm-4.col-sm-offset-4
+            #login.clearfix
+                h3.text-center #{__("Login")}
+                | !{flash}
+                hr
+                form(id="login-form", class="form", action="#", method="post", accept-charset="utf-8", autocomplete="on")
+                    .hidden
+                        input(type="hidden", name="_form", value="login-form")
+                        input(type="hidden", name="_csrf", value=csrfToken)
+                    .form-group
+                        .input-group.fluid
+                            label(for="e", class="input-group-addon icon")
+                                i.fa.fa-envelope-o
+                            input(type="text", id="e", name="email", class="form-control transparent-1", placeholder=__("email"), value= data ? data.email : "")
+                    .form-group
+                        .input-group.fluid
+                            label(for="p-w", class="input-group-addon icon")
+                                i.fa.fa-lock
+                            input(type="password", id="p-w", name="password", class="form-control transparent-1", placeholder=__("password"))
+                    .form-group
+                        label
+                            input(type="checkbox", name="remember", class="checkbox", value="true")
+                            span.fake
+                            span.title.mgl-5= __("Keep me logged in")
+                    .clearfix
+                        button(type="submit", class="btn btn-default btn-block transparent-1") #{__("login")}

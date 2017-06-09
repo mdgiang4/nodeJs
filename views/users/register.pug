@@ -1,0 +1,45 @@
+extends /layout/default
+
+block plugin
+    script(type="text/javascript", src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer)
+    script(type="text/javascript", src="/javascripts/validators/register-form.js")
+    script(type="text/javascript", src="/javascripts/form-validator.js")
+
+block variable
+    script(type="text/javascript")
+        if err !== undefined
+            | _err = !{ JSON.stringify(err) };
+        if messages !== undefined
+            | _messages = !{ JSON.stringify(messages) };
+
+block content
+    .row
+        .col-sm-4.col-sm-offset-4
+            #register.clearfix
+                h3.text-center #{__("Register")}
+                | !{flash}
+                hr
+                form(id="register-form", class="form", action="#", method="post", accept-charset="utf-8", autocomplete="off")
+                    .hidden
+                        input(type="hidden", name="_form", value="register-form")
+                        input(type="hidden", name="_csrf", value=csrfToken)
+                    .form-group
+                        .input-group.fluid
+                            label(class="input-group-addon icon", for="e")
+                                i.fa.fa-envelope-o
+                            input(type="text", name="email", id="e", class="form-control transparent-1", placeholder=__("Your email address"), value= data ? data.email : "")
+                    .form-group
+                        .input-group.fluid
+                            label(class="input-group-addon icon", for="p-w")
+                                i.fa.fa-lock
+                            input(type="password", name="password", id="p-w", class="form-control transparent-1", placeholder=__("Create password"))
+                    .form-group
+                        .input-group.fluid
+                            label(class="input-group-addon icon", for="c-p-w")
+                                i.fa.fa-lock
+                            input(type="password", name="confirm_password", id="c-p-w", class="form-control transparent-1", placeholder=__("Confirm your password"))
+                    .form-group
+                        div(id="g-recaptcha", data-form="register")
+                    .clearfix
+                        button(type="submit", class="btn btn-default btn-block transparent-1") #{__("submit")}
+                
